@@ -7,6 +7,9 @@ SPEC_FILES != find $(SPEC) -name '*.c'
 main: compile-main
 	$(CC) *.o -o cclj
 
+spec-auto:
+	find . -name '*.[ch]' | entr make spec
+
 spec: compile-spec
 	$(CC) *.o -o cclj-specc
 	./cclj-specc
