@@ -1,5 +1,9 @@
 #include "../headers/value.h"
 
+Value value_create(unsigned int typeId, void* ptr) {
+  return (Value){typeId,ptr};
+}
+
 Value value_create_nil() {
   return (Value){TYPEID_NIL,NULL};
 }

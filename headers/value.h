@@ -7,5 +7,6 @@ typedef struct Value {
   void* ptr;
 } Value;
 
+Value value_create(unsigned int typeId, void* ptr);
 Value value_create_nil();
 int value_eq(Value v1, Value v2);
