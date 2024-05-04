@@ -5,7 +5,7 @@ Value value_create(unsigned int typeId, void* ptr) {
 }
 
 Value value_create_nil() {
-  return (Value){TYPEID_NIL,NULL};
+  return value_create(TYPEID_NIL,NULL);
 }
 
 int value_eq(Value v1, Value v2) {
