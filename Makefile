@@ -1,0 +1,24 @@
+CC = gcc
+SRC = src
+SPEC = spec
+SRC_FILES != find $(SRC) -name '*.c'
+SPEC_FILES != find $(SPEC) -name '*.c'
+
+main: compile-main
+	$(CC) *.o -o cclj
+
+spec: compile-spec
+	$(CC) *.o -o cclj-specc
+	./cclj-specc
+
+compile-spec: compile-src
+	$(CC) -c $(SPEC_FILES)
+
+compile-main: compile-src
+	$(CC) -c main.c
+
+compile-src:
+	$(CC) -c $(SRC_FILES)
+
+clean:
+	rm -f *.o
