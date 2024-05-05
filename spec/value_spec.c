@@ -110,5 +110,29 @@ module(value_spec, {
       should_not(value_eq(nil,false));
       should_not(value_eq(nil,true));
     });
+
+    it("long 0 is equal to long 0", {
+      Value zero1 = value_create_long(0);
+      Value zero2 = value_create_long(0);
+      should(value_eq(zero1,zero2));
+      free(zero1.ptr);
+      free(zero2.ptr);
+    });
+
+    it("long 0 is not equal to long 1", {
+      Value zero = value_create_long(0);
+      Value one = value_create_long(1);
+      should_not(value_eq(zero,one));
+      free(zero.ptr);
+      free(one.ptr);
+    });
+
+    it("long 0 is not equal to nil", {
+      Value zero = value_create_long(0);
+      Value nil = value_create_nil();
+      should_not(value_eq(zero,nil));
+      free(zero.ptr);
+      free(nil.ptr);
+    });
   });
 });
