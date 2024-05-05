@@ -16,7 +16,7 @@ int str_is_blank(char* str) {
 }
 
 Value eval(char* str) {
-  if (str_is_blank(str))
+  if (str_is_blank(str) || strcmp(str,"nil") == 0)
     return value_create_nil();
   else
     return parseBool(str);

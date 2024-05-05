@@ -5,12 +5,16 @@
 module(eval_spec, {
   
   describe("eval", {
-    it("blank string", {
+    it("blank strings", {
       should(value_eq(value_create_nil(),eval("")));
       should(value_eq(value_create_nil(),eval(" ")));
       should(value_eq(value_create_nil(),eval("  ")));
       should(value_eq(value_create_nil(),eval("\n")));
       should(value_eq(value_create_nil(),eval(" \n ")));
+    });
+
+    it("\"nil\"", {
+      should(value_eq(value_create_nil(),eval("nil")));
     });
 
     it("\"false\"", {
