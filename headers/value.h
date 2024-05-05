@@ -9,9 +9,6 @@ typedef struct Value {
   void* ptr;
 } Value;
 
-extern int _value_false;
-extern int _value_true;
-
 Value _value_create(unsigned int typeId, void* ptr);
 Value value_create_nil();
 Value value_create_false();
