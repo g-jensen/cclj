@@ -65,6 +65,14 @@ module(eval_spec, {
       value_destroy(one);
     });
 
+    it("\"-1\"", {
+      Value neg_one = value_create_long(-1);
+      Value v = eval("-1");
+      should(value_eq(neg_one,v));
+      value_destroy(v);
+      value_destroy(neg_one);
+    });
+
     it("\"123\"", {
       Value onetwothree = value_create_long(123);
       Value v = eval("123");
