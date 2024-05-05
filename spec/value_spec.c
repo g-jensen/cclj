@@ -26,7 +26,7 @@ module(value_spec, {
   });
 
   describe("value_create_false", {
-    it("false has TYPEID_BOOL typeid and ptr to false", {
+    it("has TYPEID_BOOL typeid and ptr to false", {
       Value _false = value_create(TYPEID_BOOL,&_value_false);
       Value v = value_create_false();
       should_eq(_false.typeId,v.typeId,unsigned int);
@@ -35,7 +35,7 @@ module(value_spec, {
   });
 
   describe("value_create_true", {
-    it("false has TYPEID_BOOL typeid and ptr to false", {
+    it("has TYPEID_BOOL typeid and ptr to true", {
       Value _true = value_create(TYPEID_BOOL,&_value_true);
       Value v = value_create_true();
       should_eq(_true.typeId,v.typeId,unsigned int);
