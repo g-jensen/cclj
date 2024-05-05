@@ -1,7 +1,7 @@
 #include "../headers/value.h"
 
-Value value_construct(unsigned int typeId, void* ptr) {
-  return (Value){typeId,ptr};
+Value value_construct(unsigned int type_id, void* ptr) {
+  return (Value){type_id,ptr};
 }
 
 Value value_create_nil() {
@@ -31,11 +31,11 @@ void value_destroy(Value v) {
 }
 
 int value_eq(Value v1, Value v2) {
-  if (v1.typeId != v2.typeId)
+  if (v1.type_id != v2.type_id)
     return 0;
-  if (v1.typeId == TYPEID_BOOL)
+  if (v1.type_id == TYPEID_BOOL)
     return *(int*)(v1.ptr) == *(int*)(v2.ptr);
-  if (v1.typeId == TYPEID_NUMBER)
+  if (v1.type_id == TYPEID_NUMBER)
     return *(long*)(v1.ptr) == *(long*)(v2.ptr);
   return v1.ptr == v2.ptr;
 }

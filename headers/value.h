@@ -5,7 +5,7 @@
 #define TYPEID_NUMBER 2
 
 typedef struct Value {
-  unsigned int typeId;
+  unsigned int type_id;
   void* ptr;
 } Value;
 
