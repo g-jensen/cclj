@@ -23,7 +23,7 @@ char* last_token(char* str) {
   return trim_beginning(str+last_index);
 }
 
-Value parseBool(char* str) {
+Value parse_bool(char* str) {
   if (strcmp("false",str) == 0)
     return value_create_false();
   else
@@ -47,7 +47,7 @@ Value eval_create_value(char* str) {
   if (str_is_blank(last_tok) || strcmp(last_tok,"nil") == 0)
     return value_create_nil();
   else if (str_is_bool(last_tok))
-    return parseBool(last_tok);
+    return parse_bool(last_tok);
   else {
     char* endptr;
     return value_create_long(strtol(last_tok,&endptr,10));
