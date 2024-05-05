@@ -44,22 +44,40 @@ module(value_spec, {
   });
 
   describe("value_eq", {
-    it("true with same typeId, same ptr", {
+    it("same typeId, same ptr", {
       Value v1 = value_create(0,NULL);
       Value v2 = value_create(0,NULL);
       should(value_eq(v1,v2));
     });
 
-    it("false with different typeId, same ptr", {
+    it("different typeId, same ptr", {
       Value v1 = value_create(0,NULL);
       Value v2 = value_create(1,NULL);
       should_not(value_eq(v1,v2));
     });
 
-    it("false with same typeId, different ptr", {
+    it("same typeId, different ptr", {
       Value v1 = value_create(0,NULL);
       Value v2 = value_create(0,NULL+1);
       should_not(value_eq(v1,v2));
+    });
+
+    it("true is not equal to false", {
+      Value v1 = value_create_true();
+      Value v2 = value_create_false();
+      should_not(value_eq(v1,v2));
+    });
+
+    it("true is equal to true", {
+      Value v1 = value_create_true();
+      Value v2 = value_create_true();
+      should(value_eq(v1,v2));
+    });
+
+    it("false is equal to false", {
+      Value v1 = value_create_false();
+      Value v2 = value_create_false();
+      should(value_eq(v1,v2));
     });
   });
 });
