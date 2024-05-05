@@ -18,10 +18,9 @@ module(value_spec, {
 
   describe("value_create_nil", {
     it("has TYPEID_NIL typeid and NULL ptr", {
-      Value nil = _value_create(TYPEID_NIL,NULL);
       Value v = value_create_nil();
-      should_eq(nil.typeId,v.typeId,unsigned int);
-      should_eq(nil.ptr,v.ptr,void*);
+      should_eq(TYPEID_NIL,v.typeId,unsigned int);
+      should_eq(NULL,v.ptr,void*);
       value_destroy(v);
     });
   });
