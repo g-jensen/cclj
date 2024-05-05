@@ -4,27 +4,44 @@
 
 module(eval_spec, {
   
-  describe("eval_create_value", {
-    it("blank strings", {
+  describe("eval_create_value blank strings", {
+    it("\"\"", {
       Value nil = value_create_nil();
       Value v = eval_create_value("");
       should(value_eq(nil,v));
       value_destroy(v);
-      v = eval_create_value(" ");
-      should(value_eq(nil,v));
-      value_destroy(v);
-      v = eval_create_value("  ");
-      should(value_eq(nil,v));
-      value_destroy(v);
-      v = eval_create_value("\n");
-      should(value_eq(nil,v));
-      value_destroy(v);
-      v = eval_create_value(" \n ");
-      should(value_eq(nil,v));
-      value_destroy(v);
-      value_destroy(nil);
     });
 
+    it("\" \"", {
+      Value nil = value_create_nil();
+      Value v = eval_create_value(" ");
+      should(value_eq(nil,v));
+      value_destroy(v);
+    });
+
+    it("\"  \"", {
+      Value nil = value_create_nil();
+      Value v = eval_create_value("  ");
+      should(value_eq(nil,v));
+      value_destroy(v);
+    });
+
+    it("\"\\n\"", {
+      Value nil = value_create_nil();
+      Value v = eval_create_value("\n");
+      should(value_eq(nil,v));
+      value_destroy(v);
+    });
+
+    it("\" \\n \"", {
+      Value nil = value_create_nil();
+      Value v = eval_create_value(" \n ");
+      should(value_eq(nil,v));
+      value_destroy(v);
+    });
+  });
+
+  describe("eval_create_value single literals", {
     it("\"nil\"", {
       Value nil = value_create_nil();
       Value v = eval_create_value("nil");
