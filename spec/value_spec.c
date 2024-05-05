@@ -27,19 +27,19 @@ module(value_spec, {
 
   describe("value_create_false", {
     it("has TYPEID_BOOL typeid and ptr to false", {
-      Value _false = value_create(TYPEID_BOOL,&_value_false);
+      Value false = value_create(TYPEID_BOOL,&_value_false);
       Value v = value_create_false();
-      should_eq(_false.typeId,v.typeId,unsigned int);
-      should_eq(_false.ptr,v.ptr,void*);
+      should_eq(false.typeId,v.typeId,unsigned int);
+      should_eq(false.ptr,v.ptr,void*);
     });
   });
 
   describe("value_create_true", {
     it("has TYPEID_BOOL typeid and ptr to true", {
-      Value _true = value_create(TYPEID_BOOL,&_value_true);
+      Value true = value_create(TYPEID_BOOL,&_value_true);
       Value v = value_create_true();
-      should_eq(_true.typeId,v.typeId,unsigned int);
-      should_eq(_true.ptr,v.ptr,void*);
+      should_eq(true.typeId,v.typeId,unsigned int);
+      should_eq(true.ptr,v.ptr,void*);
     });
   });
 
@@ -78,6 +78,14 @@ module(value_spec, {
       Value v1 = value_create_false();
       Value v2 = value_create_false();
       should(value_eq(v1,v2));
+    });
+
+    it("nil is not equal to booleans", {
+      Value nil = value_create_nil();
+      Value false = value_create_false();
+      Value true = value_create_true();
+      should_not(value_eq(nil,false));
+      should_not(value_eq(nil,true));
     });
   });
 });
