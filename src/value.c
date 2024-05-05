@@ -19,6 +19,12 @@ Value value_create_true() {
   return value_create(TYPEID_BOOL,&_value_true);
 }
 
+Value value_create_long(long l) {
+  long* long_ptr = malloc(sizeof(long));
+  *long_ptr = l;
+  return value_create(TYPEID_NUMBER,long_ptr);
+}
+
 int value_eq(Value v1, Value v2) {
   return v1.typeId == v2.typeId && v1.ptr == v2.ptr;
 }

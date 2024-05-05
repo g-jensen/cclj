@@ -43,6 +43,29 @@ module(value_spec, {
     });
   });
 
+  describe("value_create_long", {
+    it("creates 0", {
+      Value v = value_create_long(0);
+      should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
+      should_eq(0,*(long*)(v.ptr),long);
+      free(v.ptr);
+    });
+
+    it("creates 1", {
+      Value v = value_create_long(1);
+      should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
+      should_eq(1,*(long*)(v.ptr),long);
+      free(v.ptr);
+    });
+
+    it("creates -1", {
+      Value v = value_create_long(-1);
+      should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
+      should_eq(-1,*(long*)(v.ptr),long);
+      free(v.ptr);
+    });
+  });
+
   describe("value_eq", {
     it("same typeId, same ptr", {
       Value v1 = value_create(0,NULL);
