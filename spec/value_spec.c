@@ -17,11 +17,29 @@ module(value_spec, {
   })
 
   describe("value_create_nil", {
-    it("has TYPEID_NIL typeid and null ptr", {
+    it("has TYPEID_NIL typeid and NULL ptr", {
       Value nil = value_create(TYPEID_NIL,NULL);
       Value v = value_create_nil();
       should_eq(nil.typeId,v.typeId,unsigned int);
       should_eq(nil.ptr,v.ptr,void*);
+    });
+  });
+
+  describe("value_create_false", {
+    it("false has TYPEID_BOOL typeid and ptr to false", {
+      Value _false = value_create(TYPEID_BOOL,&_value_false);
+      Value v = value_create_false();
+      should_eq(_false.typeId,v.typeId,unsigned int);
+      should_eq(_false.ptr,v.ptr,void*);
+    });
+  });
+
+  describe("value_create_true", {
+    it("false has TYPEID_BOOL typeid and ptr to false", {
+      Value _true = value_create(TYPEID_BOOL,&_value_true);
+      Value v = value_create_true();
+      should_eq(_true.typeId,v.typeId,unsigned int);
+      should_eq(_true.ptr,v.ptr,void*);
     });
   });
 
