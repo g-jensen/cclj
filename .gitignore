@@ -1,3 +1,4 @@
 cclj
 cclj-specc
 *.o
+.vscode
