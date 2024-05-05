@@ -4,13 +4,13 @@
 
 module(value_spec, {
   
-  describe("_value_create", {
+  describe("value_construct", {
     it("populates member variables", {
       int a;
       Value v1;
       v1.typeId = 1;
       v1.ptr = &a;
-      Value v2 = _value_create(1,&a);
+      Value v2 = value_construct(1,&a);
       should_eq(v1.typeId,v2.typeId,unsigned int);
       should_eq(v1.ptr,v2.ptr,void*);
     });
@@ -68,20 +68,20 @@ module(value_spec, {
 
   describe("value_eq", {
     it("same typeId, same ptr", {
-      Value v1 = _value_create(0,NULL);
-      Value v2 = _value_create(0,NULL);
+      Value v1 = value_construct(0,NULL);
+      Value v2 = value_construct(0,NULL);
       should(value_eq(v1,v2));
     });
 
     it("different typeId, same ptr", {
-      Value v1 = _value_create(0,NULL);
-      Value v2 = _value_create(1,NULL);
+      Value v1 = value_construct(0,NULL);
+      Value v2 = value_construct(1,NULL);
       should_not(value_eq(v1,v2));
     });
 
     it("same typeId, different ptr", {
-      Value v1 = _value_create(0,NULL);
-      Value v2 = _value_create(0,NULL+1);
+      Value v1 = value_construct(0,NULL);
+      Value v2 = value_construct(0,NULL+1);
       should_not(value_eq(v1,v2));
     });
 

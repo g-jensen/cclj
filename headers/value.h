@@ -9,7 +9,7 @@ typedef struct Value {
   void* ptr;
 } Value;
 
-Value _value_create(unsigned int typeId, void* ptr);
+Value value_construct(unsigned int typeId, void* ptr);
 Value value_create_nil();
 Value value_create_false();
 Value value_create_true();
