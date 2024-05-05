@@ -7,8 +7,16 @@ Value parseBool(char* str) {
     return value_create_true();
 }
 
+int str_is_blank(char* str) {
+  size_t len = strlen(str);
+  for (size_t i = 0; i < len; i++)
+    if (str[i] != ' ' && str[i] != '\n')
+      return 0;
+  return 1;
+}
+
 Value eval(char* str) {
-  if (strcmp("",str) == 0)
+  if (str_is_blank(str))
     return value_create_nil();
   else
     return parseBool(str);
