@@ -19,7 +19,7 @@ int str_is_blank(char* str) {
   return 1;
 }
 
-Value eval(char* str) {
+Value eval_create_value(char* str) {
   if (str_is_blank(str) || strcmp(str,"nil") == 0)
     return value_create_nil();
   else if (str_is_bool(str))
