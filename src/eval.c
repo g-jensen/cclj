@@ -1,5 +1,9 @@
 #include "../headers/eval.h"
 
+int char_is_blank(char c) {
+  return c == ' ' || c == '\n';
+}
+
 char* trim_beginning(char* str) {
   size_t len = strlen(str);
   for (size_t i = 0; i < len; i++) {
@@ -8,10 +12,6 @@ char* trim_beginning(char* str) {
     }
   }
   return str;
-}
-
-int char_is_blank(char c) {
-  return c == ' ' || c == '\n';
 }
 
 char* last_token(char* str) {
