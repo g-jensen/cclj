@@ -24,5 +24,17 @@ module(eval_spec, {
     it("\"true\"", {
       should(value_eq(value_create_true(),eval("true")));
     });
+
+    it("\"0\"", {
+      should(value_eq(value_create_long(0),eval("0")));
+    });
+
+    it("\"1\"", {
+      should(value_eq(value_create_long(1),eval("1")));
+    });
+
+    it("\"123\"", {
+      should(value_eq(value_create_long(123),eval("123")));
+    });
   });
 });

@@ -7,6 +7,10 @@ Value parseBool(char* str) {
     return value_create_true();
 }
 
+int str_is_bool(char* str) {
+  return strcmp(str,"false") == 0 || strcmp(str,"true") == 0;
+}
+
 int str_is_blank(char* str) {
   size_t len = strlen(str);
   for (size_t i = 0; i < len; i++)
@@ -18,6 +22,10 @@ int str_is_blank(char* str) {
 Value eval(char* str) {
   if (str_is_blank(str) || strcmp(str,"nil") == 0)
     return value_create_nil();
-  else
+  else if (str_is_bool(str))
     return parseBool(str);
+  else {
+    char* endptr;
+    return value_create_long(strtol(str,&endptr,10));
+  }
 }
