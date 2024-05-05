@@ -12,10 +12,12 @@ typedef struct Value {
 extern int _value_false;
 extern int _value_true;
 
-Value value_create(unsigned int typeId, void* ptr);
+Value _value_create(unsigned int typeId, void* ptr);
 Value value_create_nil();
 Value value_create_false();
 Value value_create_true();
 Value value_create_long(long l);
+
+void value_destroy(Value v); // [GMJ] Not testable as far as I know.
 
 int value_eq(Value v1, Value v2);

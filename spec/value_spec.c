@@ -4,13 +4,13 @@
 
 module(value_spec, {
   
-  describe("value_create", {
+  describe("_value_create", {
     it("populates member variables", {
       int a;
       Value v1;
       v1.typeId = 1;
       v1.ptr = &a;
-      Value v2 = value_create(1,&a);
+      Value v2 = _value_create(1,&a);
       should_eq(v1.typeId,v2.typeId,unsigned int);
       should_eq(v1.ptr,v2.ptr,void*);
     });
@@ -18,28 +18,29 @@ module(value_spec, {
 
   describe("value_create_nil", {
     it("has TYPEID_NIL typeid and NULL ptr", {
-      Value nil = value_create(TYPEID_NIL,NULL);
+      Value nil = _value_create(TYPEID_NIL,NULL);
       Value v = value_create_nil();
       should_eq(nil.typeId,v.typeId,unsigned int);
       should_eq(nil.ptr,v.ptr,void*);
+      value_destroy(v);
     });
   });
 
   describe("value_create_false", {
     it("has TYPEID_BOOL typeid and ptr to false", {
-      Value false = value_create(TYPEID_BOOL,&_value_false);
       Value v = value_create_false();
-      should_eq(false.typeId,v.typeId,unsigned int);
-      should_eq(false.ptr,v.ptr,void*);
+      should_eq(TYPEID_BOOL,v.typeId,unsigned int);
+      should_eq(0,*(int*)(v.ptr),int);
+      value_destroy(v);
     });
   });
 
   describe("value_create_true", {
     it("has TYPEID_BOOL typeid and ptr to true", {
-      Value true = value_create(TYPEID_BOOL,&_value_true);
       Value v = value_create_true();
-      should_eq(true.typeId,v.typeId,unsigned int);
-      should_eq(true.ptr,v.ptr,void*);
+      should_eq(TYPEID_BOOL,v.typeId,unsigned int);
+      should_eq(1,*(int*)(v.ptr),int);
+      value_destroy(v);
     });
   });
 
@@ -48,40 +49,40 @@ module(value_spec, {
       Value v = value_create_long(0);
       should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
       should_eq(0,*(long*)(v.ptr),long);
-      free(v.ptr);
+      value_destroy(v);
     });
 
     it("creates 1", {
       Value v = value_create_long(1);
       should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
       should_eq(1,*(long*)(v.ptr),long);
-      free(v.ptr);
+      value_destroy(v);
     });
 
     it("creates -1", {
       Value v = value_create_long(-1);
       should_eq(TYPEID_NUMBER,v.typeId,unsigned int);
       should_eq(-1,*(long*)(v.ptr),long);
-      free(v.ptr);
+      value_destroy(v);
     });
   });
 
   describe("value_eq", {
     it("same typeId, same ptr", {
-      Value v1 = value_create(0,NULL);
-      Value v2 = value_create(0,NULL);
+      Value v1 = _value_create(0,NULL);
+      Value v2 = _value_create(0,NULL);
       should(value_eq(v1,v2));
     });
 
     it("different typeId, same ptr", {
-      Value v1 = value_create(0,NULL);
-      Value v2 = value_create(1,NULL);
+      Value v1 = _value_create(0,NULL);
+      Value v2 = _value_create(1,NULL);
       should_not(value_eq(v1,v2));
     });
 
     it("same typeId, different ptr", {
-      Value v1 = value_create(0,NULL);
-      Value v2 = value_create(0,NULL+1);
+      Value v1 = _value_create(0,NULL);
+      Value v2 = _value_create(0,NULL+1);
       should_not(value_eq(v1,v2));
     });
 
@@ -89,18 +90,24 @@ module(value_spec, {
       Value v1 = value_create_true();
       Value v2 = value_create_false();
       should_not(value_eq(v1,v2));
+      value_destroy(v1);
+      value_destroy(v2);
     });
 
     it("true is equal to true", {
       Value v1 = value_create_true();
       Value v2 = value_create_true();
       should(value_eq(v1,v2));
+      value_destroy(v1);
+      value_destroy(v2);
     });
 
     it("false is equal to false", {
       Value v1 = value_create_false();
       Value v2 = value_create_false();
       should(value_eq(v1,v2));
+      value_destroy(v1);
+      value_destroy(v2);
     });
 
     it("nil is not equal to booleans", {
@@ -109,30 +116,33 @@ module(value_spec, {
       Value true = value_create_true();
       should_not(value_eq(nil,false));
       should_not(value_eq(nil,true));
+      value_destroy(nil);
+      value_destroy(false);
+      value_destroy(true);
     });
 
     it("long 0 is equal to long 0", {
       Value zero1 = value_create_long(0);
       Value zero2 = value_create_long(0);
       should(value_eq(zero1,zero2));
-      free(zero1.ptr);
-      free(zero2.ptr);
+      value_destroy(zero1);
+      value_destroy(zero2);
     });
 
     it("long 0 is not equal to long 1", {
       Value zero = value_create_long(0);
       Value one = value_create_long(1);
       should_not(value_eq(zero,one));
-      free(zero.ptr);
-      free(one.ptr);
+      value_destroy(zero);
+      value_destroy(one);
     });
 
     it("long 0 is not equal to nil", {
       Value zero = value_create_long(0);
       Value nil = value_create_nil();
       should_not(value_eq(zero,nil));
-      free(zero.ptr);
-      free(nil.ptr);
+      value_destroy(zero);
+      value_destroy(nil);
     });
   });
 });
