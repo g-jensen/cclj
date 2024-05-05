@@ -98,4 +98,70 @@ module(eval_spec, {
       value_destroy(onetwothree);
     });
   });
+
+  describe("eval_create_value multiple literals", {
+    it("\"1 nil\"", {
+      Value nil = value_create_nil();
+      Value v = eval_create_value("1 nil");
+      should(value_eq(nil,v));
+      value_destroy(v);
+      value_destroy(nil);
+    });
+
+    it("\"nil 1\"", {
+      Value one = value_create_long(1);
+      Value v = eval_create_value("nil 1");
+      should(value_eq(one,v));
+      value_destroy(v);
+      value_destroy(one);
+    });
+
+    it("\"nil true\"", {
+      Value true = value_create_true();
+      Value v = eval_create_value("nil true");
+      should(value_eq(true,v));
+      value_destroy(v);
+      value_destroy(true);
+    });
+
+    it("\"1 \"", {
+      Value one = value_create_long(1);
+      Value v = eval_create_value("1 ");
+      should(value_eq(one,v));
+      value_destroy(v);
+      value_destroy(one);
+    });
+
+    it("\"1 2 \"", {
+      Value two = value_create_long(2);
+      Value v = eval_create_value("1 2 ");
+      should(value_eq(two,v));
+      value_destroy(v);
+      value_destroy(two);
+    });
+
+    it("\"1 2  \"", {
+      Value two = value_create_long(2);
+      Value v = eval_create_value("1 2  ");
+      should(value_eq(two,v));
+      value_destroy(v);
+      value_destroy(two);
+    });
+
+    it("\"1 2  \"", {
+      Value two = value_create_long(2);
+      Value v = eval_create_value("1 2 \n");
+      should(value_eq(two,v));
+      value_destroy(v);
+      value_destroy(two);
+    });
+
+    it("\"1 2  3\"", {
+      Value three = value_create_long(3);
+      Value v = eval_create_value("1 2  3\n");
+      should(value_eq(three,v));
+      value_destroy(v);
+      value_destroy(three);
+    });
+  });
 });
