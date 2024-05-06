@@ -1,8 +1,8 @@
 #include <stdlib.h>
 
-#define TYPEID_NIL 0
-#define TYPEID_BOOL 1
-#define TYPEID_NUMBER 2
+#define VALUE_NIL_TYPEID 0
+#define VALUE_BOOL_TYPEID 1
+#define VALUE_NUMBER_TYPEID 2
 
 typedef struct Value {
   unsigned int type_id;

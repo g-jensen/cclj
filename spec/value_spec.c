@@ -17,27 +17,27 @@ module(value_spec, {
   });
 
   describe("value_create_nil", {
-    it("has TYPEID_NIL typeid and NULL ptr", {
+    it("has VALUE_NIL_TYPEID typeid and NULL ptr", {
       Value v = value_create_nil();
-      should_eq(TYPEID_NIL,v.type_id,unsigned int);
+      should_eq(VALUE_NIL_TYPEID,v.type_id,unsigned int);
       should_eq(NULL,v.ptr,void*);
       value_destroy(v);
     });
   });
 
   describe("value_create_false", {
-    it("has TYPEID_BOOL typeid and ptr to false", {
+    it("has VALUE_BOOL_TYPEID typeid and ptr to false", {
       Value v = value_create_false();
-      should_eq(TYPEID_BOOL,v.type_id,unsigned int);
+      should_eq(VALUE_BOOL_TYPEID,v.type_id,unsigned int);
       should_eq(0,*(int*)(v.ptr),int);
       value_destroy(v);
     });
   });
 
   describe("value_create_true", {
-    it("has TYPEID_BOOL typeid and ptr to true", {
+    it("has VALUE_BOOL_TYPEID typeid and ptr to true", {
       Value v = value_create_true();
-      should_eq(TYPEID_BOOL,v.type_id,unsigned int);
+      should_eq(VALUE_BOOL_TYPEID,v.type_id,unsigned int);
       should_eq(1,*(int*)(v.ptr),int);
       value_destroy(v);
     });
@@ -46,21 +46,21 @@ module(value_spec, {
   describe("value_create_long", {
     it("creates 0", {
       Value v = value_create_long(0);
-      should_eq(TYPEID_NUMBER,v.type_id,unsigned int);
+      should_eq(VALUE_NUMBER_TYPEID,v.type_id,unsigned int);
       should_eq(0,*(long*)(v.ptr),long);
       value_destroy(v);
     });
 
     it("creates 1", {
       Value v = value_create_long(1);
-      should_eq(TYPEID_NUMBER,v.type_id,unsigned int);
+      should_eq(VALUE_NUMBER_TYPEID,v.type_id,unsigned int);
       should_eq(1,*(long*)(v.ptr),long);
       value_destroy(v);
     });
 
     it("creates -1", {
       Value v = value_create_long(-1);
-      should_eq(TYPEID_NUMBER,v.type_id,unsigned int);
+      should_eq(VALUE_NUMBER_TYPEID,v.type_id,unsigned int);
       should_eq(-1,*(long*)(v.ptr),long);
       value_destroy(v);
     });
