@@ -1,3 +1,5 @@
+#include <limits.h>
+
 #include "src/specc.h"
 
 #include "../headers/value.h"
@@ -220,18 +222,18 @@ module(value_spec, {
         free(str);
       });
 
-      it("-2147483647", {
-        Value long_min = value_create_long(-2147483647);
+      it("-9223372036854775807", {
+        Value long_min = value_create_long(-9223372036854775807);
         char* str = value_create_to_string(long_min);
-        should_str_eq("-2147483647",str);
+        should_str_eq("-9223372036854775807",str);
         value_destroy(long_min);
         free(str);
       });
 
-      it("2147483647", {
-        Value long_max = value_create_long(2147483647);
+      it("9223372036854775807", {
+        Value long_max = value_create_long(9223372036854775807);
         char* str = value_create_to_string(long_max);
-        should_str_eq("2147483647",str);
+        should_str_eq("9223372036854775807",str);
         value_destroy(long_max);
         free(str);
       });

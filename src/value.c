@@ -59,7 +59,7 @@ char* str_create_bool(Value v) {
 }
 
 char* str_create_long(Value v) {
-  char* out = malloc(sizeof(char)*12);
+  char* out = malloc(sizeof(char)*21);
   long_to_ascii(*((long*)v.ptr),out);
   return out;
 }
