@@ -1,3 +1,6 @@
+#ifndef _VALUE_H_
+#define _VALUE_H_
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -26,3 +29,5 @@ void value_destroy(Value v); // [GMJ] Not testable as far as I know.
 
 int value_eq(Value v1, Value v2);
 char* value_create_to_string(Value v);
+
+#endif

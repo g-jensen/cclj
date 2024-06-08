@@ -1,3 +1,6 @@
+#ifndef _EVAL_H_
+#define _EVAL_H_
+
 #include <string.h>
 
 #include "value.h"
@@ -10,3 +13,5 @@ static int str_is_bool(char* str);
 static int str_is_blank(char* str);
 
 Value eval_create_value(char* str);
+
+#endif
