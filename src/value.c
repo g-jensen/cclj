@@ -65,11 +65,11 @@ char* str_create_long(Value v) {
 }
 
 char* value_create_to_string(Value v) {
-  if (v.type_id == VALUE_NIL_TYPEID) {
-    return str_create_nil();
-  } else if (v.type_id == VALUE_BOOL_TYPEID) {
+  if (v.type_id == VALUE_BOOL_TYPEID) {
     return str_create_bool(v);
-  } else {
+  } else if (v.type_id == VALUE_NUMBER_TYPEID) {
     return str_create_long(v);
+  } else {
+    return str_create_nil();
   }
 }
