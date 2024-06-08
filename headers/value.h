@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #define VALUE_NIL_TYPEID 0
 #define VALUE_BOOL_TYPEID 1
@@ -9,6 +10,9 @@ typedef struct Value {
   void* ptr;
 } Value;
 
+static char* string_create_nil();
+static char* string_create_bool(Value v);
+
 Value value_construct(unsigned int typeId, void* ptr);
 Value value_create_nil();
 Value value_create_false();
@@ -18,3 +22,4 @@ Value value_create_long(long l);
 void value_destroy(Value v); // [GMJ] Not testable as far as I know.
 
 int value_eq(Value v1, Value v2);
+char* value_create_to_string(Value v);

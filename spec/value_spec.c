@@ -148,4 +148,94 @@ module(value_spec, {
       });
     });
   });
+
+  context("value_create_to_string", {
+    
+    it("nil", {
+      Value nil = value_create_nil();
+      char* str = value_create_to_string(nil);
+      should_str_eq("nil",str);
+      value_destroy(nil);
+      free(str);
+    });
+
+    context("bool", {
+      
+      it("true", {
+        Value true = value_create_true();
+        char* str = value_create_to_string(true);
+        should_str_eq("true",str);
+        value_destroy(true);
+        free(str);
+      });
+
+      it("false", {
+        Value false = value_create_false();
+        char* str = value_create_to_string(false);
+        should_str_eq("false",str);
+        value_destroy(false);
+        free(str);
+      });
+    });
+
+    context("long", {
+
+      it("1", {
+        Value one = value_create_long(1);
+        char* str = value_create_to_string(one);
+        should_str_eq("1",str);
+        value_destroy(one);
+        free(str);
+      });
+
+      it("0", {
+        Value zero = value_create_long(0);
+        char* str = value_create_to_string(zero);
+        should_str_eq("0",str);
+        value_destroy(zero);
+        free(str);
+      });
+
+      it("-1", {
+        Value neg_1 = value_create_long(-1);
+        char* str = value_create_to_string(neg_1);
+        should_str_eq("-1",str);
+        value_destroy(neg_1);
+        free(str);
+      });
+
+      it("15", {
+        Value fifteen = value_create_long(15);
+        char* str = value_create_to_string(fifteen);
+        should_str_eq("15",str);
+        value_destroy(fifteen);
+        free(str);
+      });
+
+      it("-15", {
+        Value neg_fifteen = value_create_long(-15);
+        char* str = value_create_to_string(neg_fifteen);
+        should_str_eq("-15",str);
+        value_destroy(neg_fifteen);
+        free(str);
+      });
+
+      it("-2147483647", {
+        Value long_min = value_create_long(-2147483647);
+        char* str = value_create_to_string(long_min);
+        should_str_eq("-2147483647",str);
+        value_destroy(long_min);
+        free(str);
+      });
+
+      it("2147483647", {
+        Value long_max = value_create_long(2147483647);
+        char* str = value_create_to_string(long_max);
+        should_str_eq("2147483647",str);
+        value_destroy(long_max);
+        free(str);
+      });
+
+    });
+  });
 });
