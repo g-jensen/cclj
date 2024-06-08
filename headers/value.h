@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "util.h"
+
 #define VALUE_NIL_TYPEID 0
 #define VALUE_BOOL_TYPEID 1
 #define VALUE_NUMBER_TYPEID 2
@@ -10,8 +12,9 @@ typedef struct Value {
   void* ptr;
 } Value;
 
-static char* string_create_nil();
-static char* string_create_bool(Value v);
+static char* str_create_nil();
+static char* str_create_bool(Value v);
+static char* str_create_long(Value v);
 
 Value value_construct(unsigned int typeId, void* ptr);
 Value value_create_nil();
