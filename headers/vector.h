@@ -12,15 +12,15 @@ typedef struct Vector {
   size_t _capacity;
 } Vector;
 
-Vector vector_create();
-void vector_destroy(Vector vec); // not unit testable
+Vector* vector_create();
+void vector_destroy(Vector* vec); // not unit testable
 
-char* vector_create_to_str(Vector vec);
+char* vector_create_to_str(Vector* vec);
 
-long vector_size(Vector vec);
-void vector_put(Vector vec, long index, Value value);
-void vector_append(Vector vec, Value value);
-Value vector_get(Vector vec, long index);
-void vector_remove(Vector vec, long index);
+long vector_size(Vector* vec);
+void vector_put(Vector* vec, long index, Value value);
+void vector_append(Vector* vec, Value value);
+Value vector_get(Vector* vec, long index);
+void vector_remove(Vector* vec, long index);
 
 #endif
